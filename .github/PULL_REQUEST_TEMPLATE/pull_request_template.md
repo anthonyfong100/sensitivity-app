@@ -7,4 +7,3 @@
 
 ## Description
 What does this merge request do?
-
