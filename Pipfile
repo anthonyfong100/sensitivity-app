@@ -21,4 +21,5 @@ allow_prereleases = true
 
 
 [scripts]
-start-auth = "cd services/auth-service && uvicorn app.main:app --reload" 
+start-auth-dev = "cd services/auth-service && uvicorn app.main:app --reload" 
+start-auth = "cd services/auth-service && uvicorn app.main:app" 
