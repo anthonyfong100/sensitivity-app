@@ -15,6 +15,5 @@
         "editor.codeActionsOnSave": {
             "source.organizeImports": true
         }
-    },
-    "python.venvPath": "~/Library/Caches/pypoetry/virtualenvs",
+    }
 }

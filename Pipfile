@@ -12,6 +12,9 @@ flake8 = "*"
 [packages]
 uvicorn = "*"
 fastapi = "*"
+sqlalchemy = "*"
+psycopg2 = "*"
+python-dotenv = "*"
 
 [requires]
 python_version = "3.7"
@@ -19,7 +22,6 @@ python_version = "3.7"
 [pipenv]
 allow_prereleases = true
 
-
 [scripts]
-start-auth-dev = "cd services/auth-service && uvicorn app.main:app --reload" 
-start-auth = "cd services/auth-service && uvicorn app.main:app" 
+start-auth-dev = "cd services/auth-service && uvicorn main:app --reload" 
+start-auth = "cd services/auth-service && uvicorn main:app"
