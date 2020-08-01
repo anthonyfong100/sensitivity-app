@@ -43,12 +43,10 @@ async def login_for_access_token(
     form_data: OAuth2PasswordRequestForm = Depends(),
     db: Session = Depends(get_db),
 ):
-    print("token end point called")
     user = authenticate_user(
         db, form_data.username, form_data.password
     )  # the username here refers to the email
 
-    print(user)
     if not user:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
