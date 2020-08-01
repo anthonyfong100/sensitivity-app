@@ -21,6 +21,6 @@ def authenticate_user(
     db: Session, email: str, password: str
 ) -> Union[str, models.User]:
     user = db.query(models.User).filter(models.User.email == email).first()
-    if not user or not verify_password(password, user.hashed_password):
+    if not user or not verify_password(password, user.password):
         return False
     return user
