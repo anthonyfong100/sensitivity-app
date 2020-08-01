@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Response, status
 
 from .db import crud
 from .db.database import get_db
@@ -11,7 +11,7 @@ auth_router = APIRouter()
 
 @auth_router.get("/")
 async def root():
-    return {"message": "Hello World"}
+    return Response(status_code=status.HTTP_200_OK)
 
 
 @auth_router.post(
