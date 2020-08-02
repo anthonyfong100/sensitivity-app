@@ -15,7 +15,7 @@ from .utils import get_file_size, save_file_to_path
 file_router = APIRouter()
 
 
-@file_router.get("/")
+@file_router.get("/healthcheck")
 async def root():
     return Response(status_code=status.HTTP_200_OK)
 
