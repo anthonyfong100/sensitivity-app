@@ -36,8 +36,8 @@ async def create_upload_file(
     db: Session = Depends(get_db),
     username: str = Depends(verify_token),
 ):
-    file = read_files(db, username=username, filename=file.filename)
-    if file:
+    db_file = read_files(db, username=username, filename=file.filename)
+    if db_file:
         raise HTTPException(
             status_code=400, detail="File has already been uploaded before"
         )

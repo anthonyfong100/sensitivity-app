@@ -16,3 +16,22 @@ services:
       - "8000:8000"
     depends_on:
       - auth-db
+    restart: "always"
+  file-db:
+    image: postgres
+    environment:
+      POSTGRES_USERNAME: postgres
+      POSTGRES_PASSWORD: password
+  file-svc:
+    build:
+      context: ./services/file-service
+      dockerfile: Dockerfile
+    env_file: ./services/file-service/.env
+    environment:
+      DATABASE_URI: postgresql://postgres:password@file-db/postgres
+      FILE_UPLOAD_DIR: /file-service/data
+    ports:
+      - "7000:7000"
+    depends_on:
+      - file-db
+    restart: "always"
