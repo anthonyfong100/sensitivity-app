@@ -14,7 +14,7 @@ from .schema import Token, UserAccountCreateConfirm, UserAccountDetails
 auth_router = APIRouter()
 
 
-@auth_router.get("/")
+@auth_router.get("/healthcheck")
 async def root():
     return Response(status_code=status.HTTP_200_OK)
 
