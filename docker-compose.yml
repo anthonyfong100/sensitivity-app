@@ -1,0 +1,18 @@
+version: "3"
+services:
+  auth-db:
+    image: postgres
+    environment:
+      POSTGRES_USERNAME: postgres
+      POSTGRES_PASSWORD: password
+  auth-svc:
+    build:
+      context: ./services/auth-service
+      dockerfile: Dockerfile
+    env_file: ./services/auth-service/.env
+    environment:
+      DATABASE_URI: postgresql://postgres:password@auth-db/postgres
+    ports:
+      - "8000:8000"
+    depends_on:
+      - auth-db

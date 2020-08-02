@@ -3,10 +3,7 @@ from sqlalchemy.orm import Session
 from app.schema import UserAccountDetails
 
 from . import models
-
-
-def encrypt_password(password: str) -> str:
-    return password + "notreallyhashed"
+from .hashing import encrypt_password
 
 
 def create_user(db: Session, user: UserAccountDetails) -> models.User:

@@ -13,8 +13,12 @@ flake8 = "*"
 uvicorn = "*"
 fastapi = "*"
 sqlalchemy = "*"
-psycopg2 = "*"
+psycopg2-binary = "*"
 python-dotenv = "*"
+python-jose = "*"
+passlib = {extras = ["bcrypt"],version = "*"}
+python-multipart = "*"
+
 
 [requires]
 python_version = "3.7"
