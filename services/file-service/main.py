@@ -2,9 +2,12 @@ import os
 
 import uvicorn
 from app import config
+from app.db import database, models
 from app.middleware import verify_token
 from app.routes import file_router
 from fastapi import Depends, FastAPI
+
+models.Base.metadata.create_all(bind=database.engine)
 
 app = FastAPI(docs_url="/docs", redoc_url=None)
 
