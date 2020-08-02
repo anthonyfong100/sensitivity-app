@@ -7,8 +7,8 @@ from .hashing import encrypt_password
 
 
 def create_user(db: Session, user: UserAccountDetails) -> models.User:
-    fake_hashed_password = encrypt_password(user.password)
-    db_user = models.User(email=user.email, password=fake_hashed_password)
+    hashed_password = encrypt_password(user.password)
+    db_user = models.User(email=user.email, password=hashed_password)
     db.add(db_user)
     db.commit()
     db.refresh(db_user)
