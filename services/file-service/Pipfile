@@ -1,0 +1,30 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+black = "*"
+isort = "*"
+pre-commit = "*"
+flake8 = "*"
+
+[packages]
+uvicorn = "*"
+fastapi = "*"
+sqlalchemy = "*"
+psycopg2-binary = "*"
+python-dotenv = "*"
+python-jose = "*"
+python-multipart = "*"
+
+
+[requires]
+python_version = "3.7"
+
+[pipenv]
+allow_prereleases = true
+
+[scripts]
+dev = "uvicorn main:app --reload --port 7000"
+start = "uvicorn main:app --port 7000"
