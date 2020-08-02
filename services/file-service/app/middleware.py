@@ -17,7 +17,6 @@ async def verify_token(
     )
 
     try:
-        print(jwt_token.credentials)
         payload = jwt.decode(
             jwt_token.credentials,
             os.getenv("SECRET_KEY"),
@@ -26,5 +25,6 @@ async def verify_token(
         username: str = payload.get("sub")
         if username is None:
             raise credentials_exception
+        return username
     except (JWTError, KeyError):
         raise credentials_exception
