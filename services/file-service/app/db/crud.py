@@ -22,5 +22,5 @@ def create_file(
 
 def read_files(db: Session, **kwargs) -> List[models.File]:
     if kwargs:
-        return db.query(models.File).filter_by(**kwargs)
+        return db.query(models.File).filter_by(**kwargs).all()
     return db.query(models.File).all()
