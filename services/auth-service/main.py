@@ -11,7 +11,11 @@ from fastapi import FastAPI
 
 models.Base.metadata.create_all(bind=database.engine)
 
-app = FastAPI()
+app = FastAPI(
+    docs_url="/api/auth/docs",
+    openapi_url="/api/auth/openapi.json",
+    redoc_url=None,
+)
 
 app.include_router(auth_router, prefix="/api/auth", tags=["auth"])
 
