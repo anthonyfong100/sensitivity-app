@@ -23,3 +23,9 @@ def convert_sql_model_dict(models: List[declarative_base]) -> dict:
     for model in models:
         res.append(model.__dict__)
     return res
+
+
+def read_file(file_path: str) -> str:
+    with open(file_path, "r") as file:
+        file_str = file.read()
+    return file_str

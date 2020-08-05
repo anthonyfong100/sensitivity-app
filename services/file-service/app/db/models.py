@@ -1,5 +1,6 @@
-from sqlalchemy import Column, Integer, String, Table
+from sqlalchemy import TIMESTAMP, Column, Integer, String, Table
 from sqlalchemy.schema import UniqueConstraint
+from sqlalchemy.sql import func
 
 from .database import Base
 
@@ -14,3 +15,7 @@ class File(Base):
     filename = Column(String, index=True)
     filesize = Column(Integer)
     filepath = Column(String)
+    sensitivity_score = Column(Integer)
+    last_updated_time = Column(
+        TIMESTAMP, server_default=func.now(), onupdate=func.current_timestamp()
+    )
