@@ -15,6 +15,7 @@ class File(Base):
     filename = Column(String, index=True)
     filesize = Column(Integer)
     filepath = Column(String)
+    sensitivity_score = Column(Integer)
     last_updated_time = Column(
         TIMESTAMP, server_default=func.now(), onupdate=func.current_timestamp()
     )
