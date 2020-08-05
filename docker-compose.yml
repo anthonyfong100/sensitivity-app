@@ -57,18 +57,24 @@ services:
     build:
       context: ./services/file-service
       dockerfile: Dockerfile
-    command: celery -A app.run_celery beat
+    command: celery -A app.run_celery beat -l info
     depends_on:
       - redis-celery
+      - file-db
+      - file-svc
     environment:
       CELERY_BROKER_URL: redis://redis-celery:6379/0
+      DATABASE_URI: postgresql://postgres:password@file-db/postgres
 
   celery-worker:
     build:
       context: ./services/file-service
       dockerfile: Dockerfile
-    command: celery -A app.run_celery worker
+    command: celery -A app.run_celery worker -l info
     depends_on:
       - redis-celery
+      - file-db
+      - file-svc
     environment:
       CELERY_BROKER_URL: redis://redis-celery:6379/0
+      DATABASE_URI: postgresql://postgres:password@file-db/postgres

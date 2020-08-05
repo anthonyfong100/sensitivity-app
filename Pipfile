@@ -18,6 +18,8 @@ python-dotenv = "*"
 python-jose = "*"
 passlib = {extras = ["bcrypt"],version = "*"}
 python-multipart = "*"
+celery = "*"
+
 
 [requires]
 python_version = "3.7"
@@ -28,4 +30,7 @@ allow_prereleases = true
 [scripts]
 start-auth-dev = "bash -c 'cd services/auth-service && uvicorn main:app --reload'" 
 start-auth = "bash -c 'cd services/auth-service && uvicorn main:app'"
-test = "echo testing"
+start-file-dev = "bash -c ' cd services/file-service && uvicorn main:app --reload --port 7000'"
+start-file = "bash -c 'cd services/file-service && uvicorn main:app --port 7000'"
+start-beat =  "bash -c 'cd services/file-service && celery -A app.run_celery beat -l info'"
+start-worker =  "bash -c 'cd services/file-service && celery -A app.run_celery worker -l info'"
