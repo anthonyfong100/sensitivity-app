@@ -10,11 +10,13 @@ services:
     depends_on:
       - auth-svc
       - file-svc
+
   auth-db:
     image: postgres
     environment:
       POSTGRES_USERNAME: postgres
       POSTGRES_PASSWORD: password
+
   auth-svc:
     build:
       context: ./services/auth-service
@@ -27,11 +29,13 @@ services:
     depends_on:
       - auth-db
     restart: "always"
+
   file-db:
     image: postgres
     environment:
       POSTGRES_USERNAME: postgres
       POSTGRES_PASSWORD: password
+
   file-svc:
     build:
       context: ./services/file-service
@@ -45,3 +49,26 @@ services:
     depends_on:
       - file-db
     restart: "always"
+
+  redis-celery:
+    image: redis:alpine
+
+  celery-beat:
+    build:
+      context: ./services/file-service
+      dockerfile: Dockerfile
+    command: bash -c "cd app && celery -A celery_file beat"
+    depends_on:
+      - redis-celery
+    environment:
+      CELERY_BROKER: redis://redis-celery:6379/0
+
+  celery-worker:
+    build:
+      context: ./services/file-service
+      dockerfile: Dockerfile
+    command: bash -c "cd app && celery -A celery_file worker"
+    depends_on:
+      - redis-celery
+    environment:
+      CELERY_BROKER: redis://redis-celery:6379/0
