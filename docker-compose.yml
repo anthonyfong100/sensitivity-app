@@ -10,11 +10,14 @@ services:
     depends_on:
       - auth-svc
       - file-svc
+
   auth-db:
     image: postgres
+    container_name: auth-db
     environment:
       POSTGRES_USERNAME: postgres
       POSTGRES_PASSWORD: password
+
   auth-svc:
     build:
       context: ./services/auth-service
@@ -27,11 +30,14 @@ services:
     depends_on:
       - auth-db
     restart: "always"
+
   file-db:
     image: postgres
+    container_name: file-db
     environment:
       POSTGRES_USERNAME: postgres
       POSTGRES_PASSWORD: password
+
   file-svc:
     build:
       context: ./services/file-service
@@ -40,8 +46,47 @@ services:
     environment:
       DATABASE_URI: postgresql://postgres:password@file-db/postgres
       FILE_UPLOAD_DIR: /file-service/data
+      CELERY_BROKER_URL: redis://redis-celery:6379/0
     ports:
       - "7000:7000"
     depends_on:
       - file-db
     restart: "always"
+    volumes:
+      - file-volume:/file-service/data
+
+  redis-celery:
+    image: redis:alpine
+
+  celery-beat:
+    build:
+      context: ./services/file-service
+      dockerfile: Dockerfile
+    command: celery -A app.run_celery beat -l info
+    depends_on:
+      - redis-celery
+      - file-db
+      - file-svc
+    environment:
+      CELERY_BROKER_URL: redis://redis-celery:6379/0
+      DATABASE_URI: postgresql://postgres:password@file-db/postgres
+    volumes:
+      - file-volume:/file-service/data
+
+  celery-worker:
+    build:
+      context: ./services/file-service
+      dockerfile: Dockerfile
+    command: celery -A app.run_celery worker -l info
+    depends_on:
+      - redis-celery
+      - file-db
+      - file-svc
+    environment:
+      CELERY_BROKER_URL: redis://redis-celery:6379/0
+      DATABASE_URI: postgresql://postgres:password@file-db/postgres
+    volumes:
+      - file-volume:/file-service/data
+
+volumes:
+  file-volume:
