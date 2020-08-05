@@ -11,7 +11,6 @@ from app.utils import read_file
 
 @celery_app.task
 def update_sensitivity_score():
-    print("updating sensitivity score")
     db = next(get_db())
     files = read_files(db)
 
