@@ -1,4 +1,3 @@
-# celeryconfig.py
 import os
 
 broker_url = os.getenv("CELERY_BROKER")
