@@ -17,7 +17,8 @@ psycopg2-binary = "*"
 python-dotenv = "*"
 python-jose = "*"
 python-multipart = "*"
-
+celery = "*"
+redis = "*"
 
 [requires]
 python_version = "3.7"
