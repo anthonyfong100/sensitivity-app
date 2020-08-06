@@ -9,7 +9,11 @@ from fastapi import Depends, FastAPI
 
 models.Base.metadata.create_all(bind=database.engine)
 
-app = FastAPI(docs_url="/docs", redoc_url=None)
+app = FastAPI(
+    docs_url="/api/file/docs",
+    openapi_url="/api/file/openapi.json",
+    redoc_url=None,
+)
 
 app.include_router(
     file_router,
