@@ -9,7 +9,10 @@ services:
       - 80:80
     depends_on:
       - auth-svc
+      - auth-db
       - file-svc
+      - file-db
+    restart: "always"
 
   auth-db:
     image: postgres
