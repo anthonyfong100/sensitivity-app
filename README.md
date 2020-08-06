@@ -1,4 +1,4 @@
-# Sensitivity
+# Sensitivity-app
 
 Sensitivity-app is a sample application designed in a micro-service architecture pattern. It is built upon [FastAPI](https://github.com/tiangolo/fastapi) and uses celery for the triggering periodic tasks.
 
