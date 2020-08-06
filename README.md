@@ -10,7 +10,7 @@ To test out the repository, simply run:
 docker-compose build && docker-compose up
 ~~~
 
-> Go to http://www.localhost/api/file/docs or http://www.localhost/api/auth/docsfor OpenAPI generated docs for file and auth microservice
+> Go to http://www.localhost/api/file/docs or http://www.localhost/api/auth/docs for OpenAPI generated docs for file and auth microservice
 
 
 ## Developing locally
@@ -24,6 +24,8 @@ pre-commit install
 ~~~
 
 Precommit is used to ensure high code quality by running [black](https://github.com/psf/black) formatting and flake8 linting checks before each commit.
+
+> WARNING: The env files are shared here for convenience sake, please do not share env files when creating your own repo. To do so add env files into gitignore and do not commit these files
 
 #### Running auth service
 The following commands are to be run from the root directory unless otherwise stated.
