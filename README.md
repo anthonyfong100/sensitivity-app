@@ -10,9 +10,24 @@ To test out the repository, simply run:
 docker-compose build && docker-compose up
 ~~~
 
-> Go to http://www.localhost/api/file/docs or http://www.localhost/api/auth/docs for OpenAPI generated docs for file and auth microservice
+> Go to http://www.localhost/api/auth/docs or http://www.localhost/api/file/docs for OpenAPI generated docs for file and auth microservice
+
+---
+## Workflow for testing
+
+> TLDR: Create a user, authenticate and get a JWT token, Authorize using token, call file service api
+
+#### Auth-service
+1. Go to http://www.localhost/api/auth/docs and create a user
+2. Using that user that is just created, create a jwt token by posting to /token end point 
+3. Copy that token 
+
+#### File-service
+1. Authorize the page by clicking on the authorize button and pasting the token in.
+2. Explore the file service apis
 
 
+---
 ## Developing locally
 ### Setting up the repo
 
